@@ -50,6 +50,27 @@ describe('No controller, ao executar função', () => {
             }))
         })
 
+        test('em caso de sucesso, retornar response do request', async () => {
+            const response = await supertest(app)
+            .post('/psicologos')
+            .send({
+                nome: "alo",
+                email: `${randomizador(24)}@email.com`,
+                senha: "123",
+                apresentacao: "bla bla bla",
+                cep: "01001000"
+            })
+            
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    nome: "alo",
+                    email: "nataliaAlo8@gmail.com",
+                    apresentacao: "bla bla bla",
+                })
+            )
 
+        })
+
+        
     })
 })
